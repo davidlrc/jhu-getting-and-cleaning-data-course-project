@@ -144,8 +144,8 @@ merged_data <- cbind(subject_data, training_test_labels, training_test_data)
 dim(merged_data)
 [1] 10299   563
 ```
-\
-
+  
+  
 ### Step 2: Extracts only the measurements on the mean and standard deviation for each measurement.
 Extract only columns subject, label and those with name that contains either *"mean()"* (Mean) or *"value std()"* (Standard deviation) to a new `data.table` `tidy_data`.
 ```
