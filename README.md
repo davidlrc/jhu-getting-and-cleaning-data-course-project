@@ -1,26 +1,18 @@
----
-title: "README for JHU Getting and Cleaning Data Course Project"
-author: "David Lee"
-date: "8 November 2020"
-output:
-  html_document:
-    keep_md: yes
----
-\
+# README for JHU Getting and Cleaning Data Course Project
+## David Lee
+## 9 November 2020
 
 ## Project Description
 This is a peer-graded assignment of Johns Hopkins University's Data Science course "Getting and Cleaning Data" on Coursera.\
 The purpose of this project is to demonstrate the ability to collect, work with, and clean a data set. 
 The goal is to prepare tidy data that can be used for later analysis.
-\
-\
-
+ 
+ 
 ## Dataset
 Human Activity Recognition Using Smartphones Data Set: 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-\
-\
-
+ 
+ 
 ## Files
 * **CodeBook.md** is a code book that describes the variables, the data, and any transformations or work that performed to clean up the data.
 
@@ -32,16 +24,14 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
     * Step 5: From the data set in step 4, create a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 * **tidy_data_mean.txt** contains the tidy data set after going through data cleaning.
-\
-\
-
+  
+  
 ## Description of run_analysis.R
 
 ### Perequisites
 * The *[Human Activity Recognition Using Smartphones Data Set](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)* has been downloaded and all files have been extracted to the working directory.
 * The extracted files reside in *"UCI HAR Dataset"* folder.
-\
-\
+
 
 ### Libraries
 1. **data.table** is efficient in handling large data as tables.
@@ -51,8 +41,8 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
     library(data.table)
     library(dplyr)
     ```
-\
-
+  
+  
 ### Preparation: Load and assign data sets.
 After analysing the requirements, the following files are identified as required:
 
@@ -124,8 +114,8 @@ test_labels <- fread("UCI HAR Dataset/test/y_test.txt", col.names = "label")
 dim(test_labels)
 [1] 2947    1
 ```
-\
-
+  
+  
 ### Step 1: Merges the training and the test sets to create one data set.
 Merge rows of `training_set` and `test_set` `data.table` to create `training_test_data`.
 ```
@@ -164,15 +154,15 @@ tidy_data <- merged_data %>%
 dim(tidy_data)
 [1] 10299    68
 ```
-\
- 
+  
+  
 ### Step 3: Uses descriptive activity names to name the activities in the data set.
 Replace Label numbers in `code` column of the `tidy_data` with the corresponding activity text from second column of the `activity_labels` `data.table`.
 ```
 tidy_data$label <- activity_labels[tidy_data$label, 2]
 ```
-\
-
+  
+  
 ### Step 4: Appropriately labels the data set with descriptive variable names.
 Rename `label` column to `activity`.
 ```
@@ -269,8 +259,8 @@ Convert all text to lowercase.
 ```
 names(tidy_data) <- tolower(gsub("(?<=[a-z0-9])(?=[A-Z])", "_", names(tidy_data), perl = TRUE))
 ```
-\
-
+  
+  
 ### Step 5: From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 Group data in `tidy_data` by `subject` and `activity`, and sumarise all columns after applying the `mean` transformation to them, to create `tidy_data_mean` `data.frame`.
 ```
@@ -285,8 +275,4 @@ Write `tidy_data_mean` `data.frame` to text file `tidy_data_mean.txt`.
 ```
 write.table(tidy_data_mean, "tidy_data_mean.txt", row.name = FALSE)
 ```
-\
-\
-\
-\
-\
+  
